@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Khmer TTS">
   <link rel="apple-touch-icon" href="icon.png">
-  <title>Khmer TTS - Sreymom Voice</title>
+  <title>Khmer TTS - DomZzz Voice</title>
   <link href="https://fonts.googleapis.com/css2?family=Battambang&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Battambang', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 20px; background-color: #f5f5f5; min-height: 100vh; }
@@ -19,26 +19,36 @@
   </style>
 </head>
 <body>
-  <h1>Khmer TTS - Sreymom Voice</h1>
+  <h1>Khmer TTS - DomZzz Voice</h1>
   <textarea id="text" placeholder="សូមវាយអត្ថបទភាសាខ្មែរ...">សួស្តី! សូមសាកល្បងសរសេរអត្ថបទនៅទីនេះ។</textarea>
-  <button id="ttsButton">បម្លែងទៅសំឡេង</button>
+  <button id="ttsButton">បម្លែងទៅសំឡេង និងទាញយក MP3</button>
   <button id="telegram">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
     Contact Me
   </button>
   <footer>Developed by DomZzz</footer>
+
   <script>
     const ttsButton = document.getElementById('ttsButton');
     const textArea = document.getElementById('text');
-    ttsButton.addEventListener('click', () => {
+
+    ttsButton.addEventListener('click', async () => {
       const text = textArea.value.trim();
       if (!text) { alert("សូមវាយអត្ថបទភាសាខ្មែរ!"); return; }
+
+      // Use Web Speech API for TTS playback
       if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'km-KH';
         speechSynthesis.speak(utterance);
-      } else { alert("Your browser does not support speech synthesis."); }
+      }
+
+      // Generate MP3 download via Web Speech API is not supported directly.
+      // Workaround: Use server-side TTS or external API.
+      // Here we create a placeholder alert for download functionality.
+      alert("MP3 download feature requires a TTS server API. You can integrate Google Cloud TTS or similar service.");
     });
+
     document.getElementById('telegram').addEventListener('click', () => {
       window.open('https://t.me/domunlocked', '_blank');
     });
